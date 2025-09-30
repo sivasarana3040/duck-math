@@ -78,7 +78,7 @@ nav h1 {
 }
  
 .search button {
-    background-color: #fff;
+    background-color: #96A3FF;
     border: none;
     border-radius: 0 1vw 1vw 0;
     color:#222222;
@@ -182,4 +182,5 @@ nav h1 {
     .featured .play-button i {
     font-size: 5vw;
     text-shadow: 0 0 100px #2c7ffc;
+
     }
