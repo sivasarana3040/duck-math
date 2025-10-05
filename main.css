@@ -8,6 +8,7 @@
   --text-dark: #222;
   --font-main: 'Montserrat', sans-serif;
   --radius: 1vw;
+  --shadow-card: 5px 5px 10px rgba(53, 53, 53, 0.45);
 }
 
 * {
@@ -29,10 +30,10 @@ nav {
   background-color: var(--bg-nav);
   display: flex;
   align-items: center;
-  height: 7vw;
+  height: clamp(56px, 7vw, 120px);
   width: 100%;
   padding: 0 1%;
-  z-index: 5;
+  z-index: 1000;
 }
 
 nav img {
@@ -41,11 +42,12 @@ nav img {
   border-radius: var(--radius);
   cursor: pointer;
   user-select: none;
-  box-shadow: 5px 5px 10px rgba(53, 53, 53, 0.459);
+  box-shadow: var(--shadow-card);
+  display: block;
 }
 
 nav h1 {
-  font-size: 4vw;
+  font-size: clamp(24px, 4vw, 64px);
   font-weight: 800;
   margin-right: 1%;
 }
@@ -54,7 +56,7 @@ nav h1 {
 .content {
   display: flex;
   flex-direction: column;
-  padding: 7vw 2vw 2vw;
+  padding: calc(clamp(56px, 7vw, 120px) + 1.5vw) 2vw 2vw;
   padding-top: 0;
 }
 
@@ -68,6 +70,7 @@ nav h1 {
 /* Search Bar */
 .search {
   display: flex;
+  gap: 0;
   margin: 2.5vw 0 0 1.2vw;
   user-select: none;
 }
@@ -77,7 +80,7 @@ nav h1 {
   border: none;
   border-radius: var(--radius) 0 0 var(--radius);
   color: var(--text-light);
-  font-size: 1.5vw;
+  font-size: clamp(14px, 1.5vw, 20px);
   font-weight: 600;
   padding: 0.8vw 1.5vw;
   outline: none;
@@ -86,7 +89,7 @@ nav h1 {
 .search input::placeholder {
   color: var(--text-light);
   font-weight: 600;
-  font-size: 1.5vw;
+  font-size: clamp(14px, 1.5vw, 20px);
 }
 
 .search button {
@@ -94,11 +97,17 @@ nav h1 {
   border: none;
   border-radius: 0 var(--radius) var(--radius) 0;
   color: var(--text-dark);
-  font-size: 1.5vw;
+  font-size: clamp(14px, 1.5vw, 20px);
   font-weight: 600;
   padding: 0.8vw 1vw;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+.search button:hover { background-color: #b0bbff; }
+.search button:active { transform: scale(0.98); }
+.search button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
 }
 
 /* Game Grid */
@@ -110,6 +119,10 @@ nav h1 {
   padding-bottom: 5vw;
 }
 
+#games a {
+  display: inline-block;
+}
+
 #games img {
   height: 15.6vw;
   width: 15.6vw;
@@ -117,11 +130,13 @@ nav h1 {
   margin: 0.5vw;
   cursor: pointer;
   user-select: none;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: block;
+  box-shadow: var(--shadow-card);
 }
 
 #games img:hover {
-  transform: scale(1.1);
+  transform: scale(1.06);
 }
 
 /* Featured Section */
@@ -134,7 +149,7 @@ nav h1 {
 }
 
 .featured h1 {
-  font-size: 3.5vw;
+  font-size: clamp(22px, 3.5vw, 54px);
   font-weight: 700;
   margin: 1vw;
   width: 100%;
@@ -146,6 +161,12 @@ nav h1 {
   flex-direction: column;
 }
 
+.featured .row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .featured img {
   height: 12.5vw;
   width: 12.5vw;
@@ -153,7 +174,9 @@ nav h1 {
   margin: 0.5vw;
   cursor: pointer;
   user-select: none;
-  transition: transform 0.2s ease, filter 0.2s ease;
+  transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+  display: block;
+  box-shadow: var(--shadow-card);
 }
 
 .featured img:hover {
@@ -176,9 +199,9 @@ nav h1 {
 
 .featured .play-button {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  inset: 0;
+  display: grid;
+  place-items: center;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
@@ -192,4 +215,99 @@ nav h1 {
   font-size: 5vw;
   color: #2c7ffc;
   text-shadow: 0 0 20px #2c7ffc;
+}
+
+/* Accessibility focus styles for thumbnails */
+#games a:focus-visible img,
+.featured a:focus-visible img {
+  outline: 3px solid #fff;
+  outline-offset: 4px;
+}
+
+/* MOTD Overlay */
+.motd-overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.75);
+  z-index: 2000;
+}
+
+.motd-box {
+  background: #fff;
+  color: #222;
+  padding: 2vw;
+  border-radius: var(--radius);
+  max-width: 520px;
+  width: 85%;
+  text-align: center;
+  position: relative;
+  animation: motdFadeIn 0.25s ease;
+  font-family: var(--font-main);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+.motd-box h2 {
+  margin: 0 0 0.8em;
+  font-size: clamp(18px, 2.2vw, 28px);
+  font-weight: 800;
+  color: #111;
+}
+
+.motd-box p {
+  margin: 0;
+  font-size: clamp(14px, 1.6vw, 18px);
+  color: #333;
+}
+
+.motd-close {
+  position: absolute;
+  top: 0.6vw;
+  right: 1vw;
+  font-size: clamp(18px, 2vw, 28px);
+  line-height: 1;
+  border: none;
+  background: transparent;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.1s ease;
+}
+.motd-close:hover { color: #e53935; }
+.motd-close:active { transform: scale(0.96); }
+
+/* Animation */
+@keyframes motdFadeIn {
+  from { opacity: 0; transform: translateY(6px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* Mobile adjustments */
+@media (max-width: 720px) {
+  :root { --radius: 3vw; }
+
+  .featured img {
+    height: 30vw;
+    width: 30vw;
+  }
+
+  .featured .row img {
+    height: 60vw;
+    width: 60vw;
+  }
+
+  #games img {
+    height: 32vw;
+    width: 32vw;
+  }
+
+  .search {
+    margin: 5vw 2vw 0;
+  }
 }
