@@ -236,7 +236,7 @@ z-index: 2000;
 }
 
 .motd-box {
-background: #fff;
+background: #00368A;
 color: #222;
 padding: 2vw;
 border-radius: var(--radius);
@@ -311,3 +311,4 @@ width: 32vw;
 margin: 5vw 2vw 0;
 }
 }
+
