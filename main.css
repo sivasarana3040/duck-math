@@ -259,7 +259,7 @@ color: #000;
 .motd-box p {
 margin: 0;
 font-size: clamp(14px, 1.6vw, 18px);
-color: #333;
+color: #fff;
 }
 
 .motd-close {
@@ -311,5 +311,6 @@ width: 32vw;
 margin: 5vw 2vw 0;
 }
 }
+
 
 
