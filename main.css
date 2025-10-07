@@ -236,8 +236,8 @@ z-index: 2000;
 }
 
 .motd-box {
-background: #fff;
-color: #222;
+background: #00368A;
+color: #ffff;
 padding: 2vw;
 border-radius: var(--radius);
 max-width: 520px;
@@ -253,13 +253,13 @@ box-shadow: 0 10px 30px rgba(0,0,0,0.35);
 margin: 0 0 0.8em;
 font-size: clamp(18px, 2.2vw, 28px);
 font-weight: 800;
-color: #111;
+color: #000;
 }
 
 .motd-box p {
 margin: 0;
 font-size: clamp(14px, 1.6vw, 18px);
-color: #333;
+color: #fff;
 }
 
 .motd-close {
@@ -311,3 +311,6 @@ width: 32vw;
 margin: 5vw 2vw 0;
 }
 }
+
+
+
