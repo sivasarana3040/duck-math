@@ -8,17 +8,44 @@
       margin: 0;
       padding: 0;
       height: 100%;
+      width: 100%;
       background-color: #000;
+      overflow: hidden;
     }
+
+    .game-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #000;
+      /* Default: portrait aspect ratio */
+      width: 100vh;   /* use viewport height as width */
+      height: 100vh;
+      max-width: 600px; /* optional limit */
+    }
+
     iframe {
       width: 100%;
       height: 100%;
       border: none;
       display: block;
     }
+
+    /* When in landscape, rotate the game so it still looks portrait */
+    @media screen and (orientation: landscape) {
+      .game-wrapper {
+        transform: translate(-50%, -50%) rotate(90deg);
+        transform-origin: center center;
+        width: 100vh;   /* height of viewport becomes width */
+        height: 100vw;  /* width of viewport becomes height */
+      }
+    }
   </style>
 </head>
 <body>
-  <iframe src="https://maddox05.github.io/basic-ruffle-player/html/clash_royale/index.html" allowfullscreen></iframe>
+  <div class="game-wrapper">
+    <iframe src="https://maddox05.github.io/basic-ruffle-player/html/clash_royale/index.html" allowfullscreen></iframe>
+  </div>
 </body>
 </html>
