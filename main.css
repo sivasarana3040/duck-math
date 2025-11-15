@@ -277,6 +277,16 @@ transition: color 0.2s ease, transform 0.1s ease;
 .motd-close:hover { color: #e53935; }
 .motd-close:active { transform: scale(0.96); }
 
+/* MOTD Image Crop */
+.motd-image {
+width: 100%;
+height: 250px;       /* fixed height for consistent cropping */
+object-fit: cover;   /* ensures image fills and crops */
+border-radius: var(--radius);
+display: block;
+margin-top: 1em;
+}
+
 /* Animation */
 @keyframes motdFadeIn {
 from { opacity: 0; transform: translateY(6px) scale(0.98); }
@@ -310,7 +320,8 @@ width: 32vw;
 .search {
 margin: 5vw 2vw 0;
 }
+
+.motd-image {
+height: 40vw; /* responsive height for smaller screens */
 }
-
-
-
+}
